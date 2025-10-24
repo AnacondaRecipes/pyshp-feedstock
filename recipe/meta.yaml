@@ -1,36 +1,42 @@
-{% set version = "2.3.1" %}
+{% set name = "pyshp" %}
+{% set version = "3.0.2.post1" %}
 
 package:
-  name: pyshp
+  name: {{ name }}
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/p/pyshp/pyshp-{{ version }}.tar.gz
-  sha256: 4caec82fd8dd096feba8217858068bacb2a3b5950f43c048c6dc32a3489d5af1
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  sha256: 18e34a66759b6d34a6f535978c76dad518200f23a727d9e22af8e8535c0245b9
 
 build:
   number: 0
   script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
+  skip: true  # [py<39]
 
 requirements:
   host:
-    - python
     - pip
-    - setuptools
-    - wheel
+    - python
+    - hatchling
   run:
     - python
 
 test:
+  source_files:
+    - test_shapefile.py
+    - shapefiles
   imports:
     - shapefile
-  requires:
-    - pip
   commands:
     - pip check
+    - pytest -v test_shapefile.py
+  requires:
+    - pip
+    - pytest
 
 about:
-  home: https://pypi.org/project/pyshp/
+  home: https://pypi.org/project/pyshp
   license: MIT
   license_family: MIT
   license_file: LICENSE.TXT
