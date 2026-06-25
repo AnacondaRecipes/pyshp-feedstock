@@ -1,5 +1,5 @@
 {% set name = "pyshp" %}
-{% set version = "3.0.2.post1" %}
+{% set version = "3.1.2" %}
 
 package:
   name: {{ name }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 18e34a66759b6d34a6f535978c76dad518200f23a727d9e22af8e8535c0245b9
+  sha256: 81baf3f8a270015242576d9c90b9120d4a91719fda28d0d39a716b9ca99a4402
 
 build:
   number: 0
@@ -27,13 +27,12 @@ requirements:
 {% set deselect_tests = " --deselect=test_shapefile.py::test_reader_url" %}
 test:
   source_files:
-    - test_shapefile.py
-    - shapefiles
+    - tests
   imports:
     - shapefile
   commands:
     - pip check
-    - pytest -v test_shapefile.py {{ deselect_tests }}
+    - python -m pytest -v tests/test_shapefile.py {{ deselect_tests }}
   requires:
     - pip
     - pytest
