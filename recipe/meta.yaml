@@ -1,5 +1,5 @@
 {% set name = "pyshp" %}
-{% set version = "3.1.2" %}
+{% set version = "3.1.6" %}
 
 package:
   name: {{ name }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 81baf3f8a270015242576d9c90b9120d4a91719fda28d0d39a716b9ca99a4402
+  sha256: 4c4b5a4138815c93defd6ebe50bae885b7e58984f431cdb7bb5d00718ac71daf
 
 build:
   number: 0
