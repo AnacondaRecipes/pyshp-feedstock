@@ -1,13 +1,16 @@
 {% set name = "pyshp" %}
-{% set version = "3.1.6" %}
+{% set version = "3.1.8" %}
+{% set deselect_tests = " --deselect=test_shapefile.py::test_reader_url" %}
 
+# Passed locally but failed randomly on the build platform:
+# E   shapefile.ShapefileException: Shapefile Reader requires a shapefile or file-like object. (no dbf file found)
 package:
   name: {{ name }}
   version: {{ version }}
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 4c4b5a4138815c93defd6ebe50bae885b7e58984f431cdb7bb5d00718ac71daf
+  sha256: ec144fdbe5bae1b99c2ef741dc68228acf7c23a67338046ad3c6fc2c8b340e65
 
 build:
   number: 0
@@ -22,9 +25,6 @@ requirements:
   run:
     - python
 
-# Passed locally but failed randomly on the build platform:
-# E   shapefile.ShapefileException: Shapefile Reader requires a shapefile or file-like object. (no dbf file found)
-{% set deselect_tests = " --deselect=test_shapefile.py::test_reader_url" %}
 test:
   source_files:
     - tests
